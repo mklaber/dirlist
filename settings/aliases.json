@@ -1,0 +1,10 @@
+{
+  "actions": [
+    {
+      "add": {
+        "index" : "directory_v1",
+        "alias" : "directory"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+ 
+/**
+ * Module dependencies.
+ */
+ 
+var program = require('commander'),
+    Promise = require('bluebird'),
+    reader = require('../lib/reader'),
+    colors = require('colors');
+
+program
+  .version("0.0.1")
+  .option('-f, --file [file]', 'Import the specified [file]')
+  .parse(process.argv);
+
+
+if (!program.file) {
+  program.help();
+  process.exit(0);
+} else {
+  reader.readFile(program.file);
+}
+
+
+

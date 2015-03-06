@@ -1,0 +1,61 @@
+{
+  "file" : {
+    "_timestamp" : {
+      "enabled" : true
+    },
+    "_id" : {
+      "path" : "path_uid"
+    },
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "index" : "not_analyzed",
+        "fields" : {
+          "tree" : {
+            "type" : "string",
+            "analyzer" : "paths"
+          }
+        }
+      },
+      "file_name" : {
+        "type" : "multi_field",
+        "fields" : {
+          "file_name" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "partial_file_name" : {
+            "type" : "string",
+            "analyzer" : "autocomplete"
+          }
+        }
+      },
+      "file_extension" : {
+        "type" : "string",
+        "analyzer" : "file_ext"
+      },
+      "date_modified" : {
+        "type" : "date"
+      },
+      "attributes" : {
+        "type" : "string"
+      },
+      "size" : {
+        "type" : "integer"
+      },
+      "user" : {
+        "type" : "string"
+      },
+      "group" : {
+        "type" : "string"
+      },
+      "line" : {
+        "type" : "string"
+      },
+      "path_uid" : {
+        "type" : "string",
+        "index" : "not_analyzed"
+      }
+    }
+  }
+}

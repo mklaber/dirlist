@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+ 
+/**
+ * Module dependencies.
+ */
+ 
+var program = require('commander'),
+    exporter = require('../lib/exporter'),
+    colors = require('colors');
+
+program
+  .version("0.0.1")
+  .option('-q, --query [file]', 'Use the query in the specified file')
+  .option('-t, --template [do {title}]', 'what to do with the results')
+    .option('-d, --destination [file]', 'where to put the results')
+  .parse(process.argv);
+
+
+if (!program.query) {
+  program.help();
+  process.exit(0);
+} else {
+
+  var reg = /{([^}]+)}/g,
+      match,
+      fields = [];
+
+  if (program.template) {
+    while(match = reg.exec(program.template)) {
+      fields.push(match[1]);
+    }
+  }
+
+  exporter.exportQueryResults(
+      require(program.query),
+      fields,
+      program.template || '',
+      program.destination
+  ).then(function() {
+        process.exit(0);
+      }).catch(function(err) {
+        console.error(err);
+        process.exit(1);
+      });
+}
+
+
+

@@ -1,0 +1,44 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": "4",
+      "number_of_replicas": "1"
+    },
+    "analysis": {
+      "analyzer" : {
+        "paths" : {
+          "tokenizer" : "path_hierarchy"
+        },
+        "file_ext" : {
+          "type" : "custom",
+          "tokenizer" : "keyword",
+          "char_filter" : [
+            "trim_file_ext"
+          ]
+        },
+        "autocomplete": {
+          "type":      "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "autocomplete_filter"
+          ]
+        }
+      },
+      "char_filter" : {
+        "trim_file_ext" : {
+          "type" : "pattern_replace",
+          "pattern" : "^\\.?(.*)",
+          "replacement" : "$1"
+        }
+      },
+      "filter": {
+        "autocomplete_filter": {
+          "type":     "edge_ngram",
+          "min_gram": 3,
+          "max_gram": 40
+        }
+      }
+    }
+  }
+}
