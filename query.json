@@ -12,7 +12,7 @@
             {
               "range" : {
                 "size" : {
-                  "gt" : 23495524
+                  "gte" : 100000000
                 }
               }
             },
@@ -22,10 +22,20 @@
                   "lt" : "2014-01-01"
                 }
               }
+            },
+            {
+              "term" : {
+                "path.tree" : "/Users/mklaber/Pictures"
+              }
             }
           ]
         }
       }
+    }
+  },
+  "aggs": {
+    "file_size_saved": {
+      "sum": { "field" : "size"}
     }
   }
 }

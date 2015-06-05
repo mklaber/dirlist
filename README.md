@@ -5,7 +5,7 @@
 Creates a file with the results of a specified query
 
 ```bash
-./bin/export -q ../query.json -t "mv {file_name}" -d myoutput.txt
+./bin/export -q ../query.json -t 'mv "./{file_name}" to_move/ && touch "moved//{file_name}.o"' -d myoutput.txt
 ```
 
 ## Importer
